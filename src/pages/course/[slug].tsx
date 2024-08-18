@@ -10,7 +10,7 @@ const CoursePage = () => {
 			<Topbar />
 			<main className='bg-dark-layer-2 min-h-screen p-6 flex flex-col items-center justify-start'>
 				<h1 className='text-3xl font-bold text-white text-center mt-6 mb-4'>
-					Course on {slug}
+					{slug}
 				</h1>
 				<p className='text-lg text-white text-center'>
 					{/* Course content for {slug} goes here */}
