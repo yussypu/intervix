@@ -1,72 +1,48 @@
-import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
+import Link from "next/link";
 import Topbar from "@/components/Topbar/Topbar";
-import useHasMounted from "@/hooks/useHasMounted";
-
-import { useState } from "react";
 
 export default function Home() {
-	const [loadingProblems, setLoadingProblems] = useState(true);
-	const hasMounted = useHasMounted();
-
-	if (!hasMounted) return null;
-
 	return (
 		<>
 			<main className='bg-dark-layer-2 min-h-screen'>
 				<Topbar />
-				<h1
-					className='text-2xl text-center text-white dark:text-white font-medium uppercase mt-10 mb-5'
-
-				>
-					 Coding Interviews Unlocked 
-				</h1>
-				<div className='relative overflow-x-auto mx-auto px-6 pb-10'>
-					{loadingProblems && (
-						<div className='max-w-[1200px] mx-auto sm:w-7/12 w-full animate-pulse'>
-							{[...Array(10)].map((_, idx) => (
-								<LoadingSkeleton key={idx} />
-							))}
+				<div className='text-center mt-10'>
+					<h1 className='text-5xl font-bold text-white'>INTERVIX</h1>
+					<p className='text-lg text-white mt-4'>
+						Unlock coding interviews with our comprehensive DSA roadmap and courses.
+					</p>
+				</div>
+				<div className='flex flex-wrap justify-center gap-6 mt-10'>
+					{dataStructures.map((topic) => (
+						<div
+							key={topic.name}
+							className='bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center'
+						>
+							<h2 className='text-xl text-white mb-4'>{topic.name}</h2>
+							<div className='flex gap-4'>
+								<Link href={`/course/${topic.slug}`}>
+									<a className='bg-blue-500 text-white px-4 py-2 rounded-lg'>
+										Learn
+									</a>
+								</Link>
+								<Link href='/problems'>
+									<a className='bg-green-500 text-white px-4 py-2 rounded-lg'>
+										Practice
+									</a>
+								</Link>
+							</div>
 						</div>
-					)}
-					<table className='text-sm text-left text-gray-500 dark:text-gray-400 sm:w-7/12 w-full max-w-[1200px] mx-auto'>
-						{!loadingProblems && (
-							<thead className='text-xs text-gray-700 uppercase dark:text-gray-400 border-b '>
-								<tr>
-									<th scope='col' className='px-1 py-3 w-0 font-medium'>
-										Status
-									</th>
-									<th scope='col' className='px-6 py-3 w-0 font-medium'>
-										Title
-									</th>
-									<th scope='col' className='px-6 py-3 w-0 font-medium'>
-										Difficulty
-									</th>
-
-									<th scope='col' className='px-6 py-3 w-0 font-medium'>
-										Category
-									</th>
-									<th scope='col' className='px-6 py-3 w-0 font-medium'>
-										Solution
-									</th>
-								</tr>
-							</thead>
-						)}
-						<ProblemsTable setLoadingProblems={setLoadingProblems} />
-					</table>
+					))}
 				</div>
 			</main>
 		</>
 	);
 }
 
-const LoadingSkeleton = () => {
-	return (
-		<div className='flex items-center space-x-12 mt-4 px-6'>
-			<div className='w-6 h-6 shrink-0 rounded-full bg-dark-layer-1'></div>
-			<div className='h-4 sm:w-52  w-32  rounded-full bg-dark-layer-1'></div>
-			<div className='h-4 sm:w-52  w-32 rounded-full bg-dark-layer-1'></div>
-			<div className='h-4 sm:w-52 w-32 rounded-full bg-dark-layer-1'></div>
-			<span className='sr-only'>Loading...</span>
-		</div>
-	);
-};
+const dataStructures = [
+	{ name: 'Arrays', slug: 'arrays' },
+	{ name: 'Pointers', slug: 'pointers' },
+	{ name: 'Stack', slug: 'stack' },
+	{ name: 'Binary Trees', slug: 'binary-trees' },
+	{ name: 'Linked Lists', slug: 'linked-lists' },
+];
