@@ -28,8 +28,6 @@ const CoursePage = () => {
 				return <ArraysCourse />;
 			case 'linked-list':
 				return <LinkedListCourse />;
-			case 'stack':
-				return <StackCourse />;
 			// Add cases for other courses
 			default:
 				return <p className='text-lg text-white text-center'>Course content not available.</p>;
