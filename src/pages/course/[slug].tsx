@@ -39,7 +39,7 @@ const CoursePage = () => {
 			<Topbar />
 			<main className='bg-dark-layer-2 min-h-screen p-6'>
 				<h1 className='text-3xl font-bold text-white text-center mt-6 mb-4'>
-					Course on {slug.replace('-', ' ').toUpperCase()}
+					{slug.replace('-', ' ').toUpperCase()}
 				</h1>
 				{renderCourseContent()}
 			</main>
