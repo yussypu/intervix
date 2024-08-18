@@ -41,8 +41,16 @@ export default function Home() {
 
 const dataStructures = [
 	{ name: 'Arrays', slug: 'arrays' },
-	{ name: 'Pointers', slug: 'pointers' },
 	{ name: 'Stack', slug: 'stack' },
-	{ name: 'Binary Trees', slug: 'binary-trees' },
-	{ name: 'Linked Lists', slug: 'linked-lists' },
+	{ name: 'Two Pointers', slug: 'two-pointers' },
+	{ name: 'Binary Search', slug: 'binary-search' },
+	{ name: 'Sliding Window', slug: 'sliding-window' },
+	{ name: 'Linked List', slug: 'linked-list' },
+	{ name: 'Trees', slug: 'trees' },
+	{ name: 'Backtracking', slug: 'backtracking' },
+	{ name: 'Heap', slug: 'heap' },
+	{ name: 'Graphs', slug: 'graphs' },
+	{ name: 'Greedy', slug: 'greedy' },
+	{ name: 'DP', slug: 'dp' },
+	{ name: 'Bit Manipulation', slug: 'bit-manipulation' },
 ];
