@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
-import Topbar from "@/components/Topbar/Topbar";
+import Topbar from "../components/Topbar/Topbar";
 
 
 const PracticePage: React.FC = () => {
