@@ -15,7 +15,7 @@ export default function Home() {
 				<div className='flex flex-wrap justify-center gap-6 mt-10'>
 					{dataStructures.map((topic) => (
 						<div
-							key={topic.name}
+							key={topic.slug}
 							className='bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center'
 						>
 							<h2 className='text-xl text-white mb-4'>{topic.name}</h2>
