@@ -18,9 +18,11 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems }) => 
 		isOpen: false,
 		videoId: "",
 	});
+	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 	const problems = useGetProblems(setLoadingProblems);
 	const solvedProblems = useGetSolvedProblems();
 	console.log("solvedProblems", solvedProblems);
+
 	const closeModal = () => {
 		setYoutubePlayer({ isOpen: false, videoId: "" });
 	};
@@ -36,55 +38,69 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems }) => 
 
 	return (
 		<>
+			<div className="flex gap-4 mb-4">
+				{['All', 'Arrays', 'Stack', 'Two Pointers', 'Binary Search', 'Sliding Window', 'Linked List', 'Trees', 'Backtracking', 'Heap', 'Graphs', 'Greedy', 'DP', 'Bit Manipulation'].map(category => (
+					<button
+						key={category}
+						className={`px-4 py-2 rounded-lg ${selectedCategory === category ? 'bg-blue-500' : 'bg-gray-800'} text-white`}
+						onClick={() => setSelectedCategory(category === 'All' ? null : category)}
+					>
+						{category}
+					</button>
+				))}
+			</div>
+
 			<tbody className='text-white'>
-				{problems.map((problem, idx) => {
-					const difficulyColor =
-						problem.difficulty === "Easy"
-							? "text-dark-green-s"
-							: problem.difficulty === "Medium"
-							? "text-dark-yellow"
-							: "text-dark-pink";
-					return (
-						<tr className={`${idx % 2 == 1 ? "bg-dark-layer-1" : ""}`} key={problem.id}>
-							<th className='px-2 py-4 font-medium whitespace-nowrap text-dark-green-s'>
-								{solvedProblems.includes(problem.id) && <BsCheckCircle fontSize={"18"} width='18' />}
-							</th>
-							<td className='px-6 py-4'>
-								{problem.link ? (
-									<Link
-										href={problem.link}
-										className='hover:text-blue-600 cursor-pointer'
-										target='_blank'
-									>
-										{problem.title}
-									</Link>
-								) : (
-									<Link
-										className='hover:text-blue-600 cursor-pointer'
-										href={`/problems/${problem.id}`}
-									>
-										{problem.title}
-									</Link>
-								)}
-							</td>
-							<td className={`px-6 py-4 ${difficulyColor}`}>{problem.difficulty}</td>
-							<td className={"px-6 py-4"}>{problem.category}</td>
-							<td className={"px-6 py-4"}>
-								{problem.videoId ? (
-									<AiFillYoutube
-										fontSize={"28"}
-										className='cursor-pointer hover:text-red-600'
-										onClick={() =>
-											setYoutubePlayer({ isOpen: true, videoId: problem.videoId as string })
-										}
-									/>
-								) : (
-									<p className='text-gray-400'>Coming soon</p>
-								)}
-							</td>
-						</tr>
-					);
-				})}
+				{problems
+					.filter(problem => !selectedCategory || problem.category === selectedCategory)
+					.map((problem, idx) => {
+						const difficulyColor =
+							problem.difficulty === "Easy"
+								? "text-dark-green-s"
+								: problem.difficulty === "Medium"
+									? "text-dark-yellow"
+									: "text-dark-pink";
+						return (
+							<tr className={`${idx % 2 == 1 ? "bg-dark-layer-1" : ""}`} key={problem.id}>
+								<th className='px-2 py-4 font-medium whitespace-nowrap text-dark-green-s'>
+									{solvedProblems.includes(problem.id) && <BsCheckCircle fontSize={"18"} width='18' />}
+								</th>
+								<td className='px-6 py-4'>
+									{problem.link ? (
+										<Link
+											href={problem.link}
+											className='hover:text-blue-600 cursor-pointer'
+											target='_blank'
+										>
+											{problem.title}
+										</Link>
+									) : (
+										<Link
+											className='hover:text-blue-600 cursor-pointer'
+											href={`/problems/${problem.id}`}
+										>
+											{problem.title}
+										</Link>
+									)}
+								</td>
+								<td className={`px-6 py-4 ${difficulyColor}`}>{problem.difficulty}</td>
+								<td className={"px-6 py-4"}>{problem.category}</td>
+								<td className={"px-6 py-4"}>
+									{problem.videoId ? (
+										<AiFillYoutube
+											fontSize={"28"}
+											className='cursor-pointer hover:text-red-600'
+											onClick={() =>
+												setYoutubePlayer({ isOpen: true, videoId: problem.videoId as string })
+											}
+										/>
+									) : (
+										<p className='text-gray-400'>Coming soon</p>
+									)}
+								</td>
+							</tr>
+						);
+					})}
 			</tbody>
 			{youtubePlayer.isOpen && (
 				<tfoot className='fixed top-0 left-0 h-screen w-screen flex items-center justify-center'>
