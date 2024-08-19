@@ -24,5 +24,5 @@ const PracticePage: React.FC = () => {
         </>
     );
 };
-
+*/
 export default PracticePage;
