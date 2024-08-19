@@ -1,36 +1,48 @@
-import { useState } from "react";
-import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
-import Topbar from "@/components/Topbar/Topbar";
+import React, { useState } from "react";
+import ProblemsTable from "@/components/ProblemsTable";
 
-export default function Practice() {
+const PracticePage: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [loadingProblems, setLoadingProblems] = useState<boolean>(false);
 
-    const categories = ["All", "Arrays", "Stack", "Two Pointers", "Binary Search", "Sliding Window", "Linked List", "Trees", "Backtracking", "Heap", "Graphs", "Greedy", "DP", "Bit Manipulation"];
-
-    const handleCategoryClick = (category: string) => {
-        setSelectedCategory(category === "All" ? null : category);
-    };
+    const categories = [
+        "Arrays", "Stack", "Two Pointers", "Binary Search", 
+        "Sliding Window", "Linked List", "Trees", "Backtracking", 
+        "Heap", "Graphs", "Greedy", "DP", "Bit Manipulation"
+    ];
 
     return (
         <>
-            <Topbar />
-            <main className='bg-dark-layer-2 min-h-screen p-6'>
-                <div className="text-center">
-                    <h1 className='text-3xl font-bold text-white mb-6'>Practice Problems</h1>
-                    <div className="flex justify-center gap-4 mb-6">
+            <main className="bg-dark-layer-2 min-h-screen">
+                <div className="text-center mt-10">
+                    <h1 className="text-5xl font-bold text-white">Practice Problems</h1>
+                    <div className="flex flex-wrap justify-center gap-4 mt-4">
                         {categories.map((category) => (
                             <button
                                 key={category}
-                                onClick={() => handleCategoryClick(category)}
-                                className={`px-4 py-2 rounded-lg ${selectedCategory === category ? "bg-blue-500 text-white" : "bg-gray-800 text-gray-300"}`}
+                                className={`px-4 py-2 rounded-lg ${selectedCategory === category ? 'bg-blue-500' : 'bg-gray-700'} text-white`}
+                                onClick={() => setSelectedCategory(category)}
                             >
                                 {category}
                             </button>
                         ))}
+                        <button
+                            className="px-4 py-2 rounded-lg bg-gray-700 text-white"
+                            onClick={() => setSelectedCategory(null)}
+                        >
+                            Show All
+                        </button>
                     </div>
                 </div>
-                <ProblemsTable selectedCategory={selectedCategory} />
+                <div className="mt-10">
+                    <ProblemsTable 
+                        selectedCategory={selectedCategory} 
+                        setLoadingProblems={setLoadingProblems} 
+                    />
+                </div>
             </main>
         </>
     );
-}
+};
+
+export default PracticePage;
