@@ -4,7 +4,7 @@ import { BsCheckCircle } from "react-icons/bs";
 import { AiFillYoutube } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 import YouTube from "react-youtube";
-import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { auth, firestore } from "@/firebase/firebase";
 import { DBProblem } from "@/utils/types/problem";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -19,7 +19,7 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems, selec
 		isOpen: false,
 		videoId: "",
 	});
-	const problems = useGetProblems(setLoadingProblems);
+	const [problems, setProblems] = useState<DBProblem[]>([]);
 	const solvedProblems = useGetSolvedProblems();
 
 	const closeModal = () => {
@@ -35,18 +35,64 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems, selec
 		return () => window.removeEventListener("keydown", handleEsc);
 	}, []);
 
+	useEffect(() => {
+		const getProblems = async () => {
+			setLoadingProblems(true);
+			let q = query(collection(firestore, "problems"), orderBy("order", "asc"));
+
+			if (selectedCategory) {
+				q = query(
+					collection(firestore, "problems"),
+					where("category", "==", selectedCategory),
+					orderBy("order", "asc")
+				);
+			}
+
+			const querySnapshot = await getDocs(q);
+			const tmp: DBProblem[] = [];
+			querySnapshot.forEach((doc) => {
+				tmp.push({ id: doc.id, ...doc.data() } as DBProblem);
+			});
+			setProblems(tmp);
+			setLoadingProblems(false);
+		};
+
+		getProblems();
+	}, [selectedCategory, setLoadingProblems]);
+
 	return (
 		<>
-			<tbody className='text-white'>
-				{problems
-					.filter(problem => !selectedCategory || problem.category === selectedCategory)
-					.map((problem, idx) => {
+			<table className='text-sm text-left text-gray-500 dark:text-gray-400 sm:w-7/12 w-full max-w-[1200px] mx-auto'>
+				<thead className='text-xs text-gray-700 uppercase dark:text-gray-400 border-b'>
+					<tr>
+						<th scope='col' className='px-1 py-3 w-0 font-medium'>
+							Status
+						</th>
+						<th scope='col' className='px-6 py-3 w-0 font-medium'>
+							Title
+						</th>
+						<th scope='col' className='px-6 py-3 w-0 font-medium'>
+							Difficulty
+						</th>
+						<th scope='col' className='px-6 py-3 w-0 font-medium cursor-pointer' onClick={() => {
+							// Toggle sorting by category when the header is clicked
+							setProblems(problems.slice().reverse()); // Example: toggling the sort order
+						}}>
+							Category
+						</th>
+						<th scope='col' className='px-6 py-3 w-0 font-medium'>
+							Solution
+						</th>
+					</tr>
+				</thead>
+				<tbody className='text-white'>
+					{problems.map((problem, idx) => {
 						const difficulyColor =
 							problem.difficulty === "Easy"
 								? "text-dark-green-s"
 								: problem.difficulty === "Medium"
-									? "text-dark-yellow"
-									: "text-dark-pink";
+								? "text-dark-yellow"
+								: "text-dark-pink";
 						return (
 							<tr className={`${idx % 2 == 1 ? "bg-dark-layer-1" : ""}`} key={problem.id}>
 								<th className='px-2 py-4 font-medium whitespace-nowrap text-dark-green-s'>
@@ -88,7 +134,9 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems, selec
 							</tr>
 						);
 					})}
-			</tbody>
+				</tbody>
+			</table>
+
 			{youtubePlayer.isOpen && (
 				<tfoot className='fixed top-0 left-0 h-screen w-screen flex items-center justify-center'>
 					<div
@@ -116,29 +164,8 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems, selec
 		</>
 	);
 };
+
 export default ProblemsTable;
-
-function useGetProblems(setLoadingProblems: React.Dispatch<React.SetStateAction<boolean>>) {
-	const [problems, setProblems] = useState<DBProblem[]>([]);
-
-	useEffect(() => {
-		const getProblems = async () => {
-			// fetching data logic
-			setLoadingProblems(true);
-			const q = query(collection(firestore, "problems"), orderBy("order", "asc"));
-			const querySnapshot = await getDocs(q);
-			const tmp: DBProblem[] = [];
-			querySnapshot.forEach((doc) => {
-				tmp.push({ id: doc.id, ...doc.data() } as DBProblem);
-			});
-			setProblems(tmp);
-			setLoadingProblems(false);
-		};
-
-		getProblems();
-	}, [setLoadingProblems]);
-	return problems;
-}
 
 function useGetSolvedProblems() {
 	const [solvedProblems, setSolvedProblems] = useState<string[]>([]);
