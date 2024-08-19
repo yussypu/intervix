@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import ProblemsTable from "@/components/ProblemsTable";
+import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
+
 
 const PracticePage: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
