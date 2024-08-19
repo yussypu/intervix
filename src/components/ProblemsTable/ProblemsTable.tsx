@@ -11,17 +11,16 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 type ProblemsTableProps = {
 	setLoadingProblems: React.Dispatch<React.SetStateAction<boolean>>;
+	selectedCategory: string | null;
 };
 
-const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems }) => {
+const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems, selectedCategory }) => {
 	const [youtubePlayer, setYoutubePlayer] = useState({
 		isOpen: false,
 		videoId: "",
 	});
-	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 	const problems = useGetProblems(setLoadingProblems);
 	const solvedProblems = useGetSolvedProblems();
-	console.log("solvedProblems", solvedProblems);
 
 	const closeModal = () => {
 		setYoutubePlayer({ isOpen: false, videoId: "" });
@@ -38,18 +37,6 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems }) => 
 
 	return (
 		<>
-			<div className="flex gap-4 mb-4">
-				{['All', 'Arrays', 'Stack', 'Two Pointers', 'Binary Search', 'Sliding Window', 'Linked List', 'Trees', 'Backtracking', 'Heap', 'Graphs', 'Greedy', 'DP', 'Bit Manipulation'].map(category => (
-					<button
-						key={category}
-						className={`px-4 py-2 rounded-lg ${selectedCategory === category ? 'bg-blue-500' : 'bg-gray-800'} text-white`}
-						onClick={() => setSelectedCategory(category === 'All' ? null : category)}
-					>
-						{category}
-					</button>
-				))}
-			</div>
-
 			<tbody className='text-white'>
 				{problems
 					.filter(problem => !selectedCategory || problem.category === selectedCategory)
