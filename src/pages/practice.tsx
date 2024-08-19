@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
-import Topbar from "@/components/Topbar/Topbar";  // Import Topbar component
+import Topbar from "@/components/Topbar/Topbar.tsx";  // Import Topbar component
 
 
 const PracticePage: React.FC = () => {
