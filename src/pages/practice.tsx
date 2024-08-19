@@ -1,68 +1,36 @@
+import { useState } from "react";
 import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
 import Topbar from "@/components/Topbar/Topbar";
-import useHasMounted from "@/hooks/useHasMounted";
-
-import { useState } from "react";
 
 export default function Practice() {
-    const [loadingProblems, setLoadingProblems] = useState(true);
-    const hasMounted = useHasMounted();
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-    if (!hasMounted) return null;
+    const categories = ["All", "Arrays", "Stack", "Two Pointers", "Binary Search", "Sliding Window", "Linked List", "Trees", "Backtracking", "Heap", "Graphs", "Greedy", "DP", "Bit Manipulation"];
+
+    const handleCategoryClick = (category: string) => {
+        setSelectedCategory(category === "All" ? null : category);
+    };
 
     return (
         <>
-            <main className='bg-dark-layer-2 min-h-screen'>
-                <Topbar />
-                <h1 className='text-2xl text-center text-white dark:text-white font-medium uppercase mt-10 mb-5'>
-                    Practice Questions
-                </h1>
-                <div className='relative overflow-x-auto mx-auto px-6 pb-10'>
-                    {loadingProblems && (
-                        <div className='max-w-[1200px] mx-auto sm:w-7/12 w-full animate-pulse'>
-                            {[...Array(10)].map((_, idx) => (
-                                <LoadingSkeleton key={idx} />
-                            ))}
-                        </div>
-                    )}
-                    <table className='text-sm text-left text-gray-500 dark:text-gray-400 sm:w-7/12 w-full max-w-[1200px] mx-auto'>
-                        {!loadingProblems && (
-                            <thead className='text-xs text-gray-700 uppercase dark:text-gray-400 border-b '>
-                                <tr>
-                                    <th scope='col' className='px-1 py-3 w-0 font-medium'>
-                                        Status
-                                    </th>
-                                    <th scope='col' className='px-6 py-3 w-0 font-medium'>
-                                        Title
-                                    </th>
-                                    <th scope='col' className='px-6 py-3 w-0 font-medium'>
-                                        Difficulty
-                                    </th>
-                                    <th scope='col' className='px-6 py-3 w-0 font-medium'>
-                                        Category
-                                    </th>
-                                    <th scope='col' className='px-6 py-3 w-0 font-medium'>
-                                        Solution
-                                    </th>
-                                </tr>
-                            </thead>
-                        )}
-                        <ProblemsTable setLoadingProblems={setLoadingProblems} />
-                    </table>
+            <Topbar />
+            <main className='bg-dark-layer-2 min-h-screen p-6'>
+                <div className="text-center">
+                    <h1 className='text-3xl font-bold text-white mb-6'>Practice Problems</h1>
+                    <div className="flex justify-center gap-4 mb-6">
+                        {categories.map((category) => (
+                            <button
+                                key={category}
+                                onClick={() => handleCategoryClick(category)}
+                                className={`px-4 py-2 rounded-lg ${selectedCategory === category ? "bg-blue-500 text-white" : "bg-gray-800 text-gray-300"}`}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </div>
                 </div>
+                <ProblemsTable selectedCategory={selectedCategory} />
             </main>
         </>
     );
 }
-
-const LoadingSkeleton = () => {
-    return (
-        <div className='flex items-center space-x-12 mt-4 px-6'>
-            <div className='w-6 h-6 shrink-0 rounded-full bg-dark-layer-1'></div>
-            <div className='h-4 sm:w-52  w-32  rounded-full bg-dark-layer-1'></div>
-            <div className='h-4 sm:w-52  w-32 rounded-full bg-dark-layer-1'></div>
-            <div className='h-4 sm:w-52 w-32 rounded-full bg-dark-layer-1'></div>
-            <span className='sr-only'>Loading...</span>
-        </div>
-    );
-};
