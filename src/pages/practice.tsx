@@ -8,6 +8,7 @@ const PracticePage: React.FC = () => {
 
     return (
         <>
+            <Topbar /> {/* Add the Topbar component here */}
             <main className="bg-dark-layer-2 min-h-screen">
                 <div className="text-center mt-10">
                     <h1 className="text-5xl font-bold text-white">Practice Problems</h1>
