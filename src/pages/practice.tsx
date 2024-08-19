@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
-import Topbar from "@/components/Topbar/Topbar";
 
 const PracticePage: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -8,7 +7,6 @@ const PracticePage: React.FC = () => {
 
     return (
         <>
-            <Topbar /> {/* Add the Topbar component here */}
             <main className="bg-dark-layer-2 min-h-screen">
                 <div className="text-center mt-10">
                     <h1 className="text-5xl font-bold text-white">Practice Problems</h1>
