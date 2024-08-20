@@ -22,12 +22,13 @@ Ensures type safety and improves code quality throughout the application.
 
 
 ## Known Issues
-### Add language support: 
-Allow problem solving in C++ and Python
+
 ### Firebase Knowledge: 
 Limited experience with Firebase resulted in some challenges during development. Future updates will aim to address these issues and enhance the application's backend functionalities.
 
 ## To Do
+### Add language support: 
+Allow problem solving in C++ and Python
 ### Add More Problems: 
 Expand the range of coding problems available on the platform.
 ### Fill Out Courses Section: 
