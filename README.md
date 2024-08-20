@@ -1,6 +1,6 @@
 # Intervix: Coding Interview Mastery Platform (NOT FINISHED)
 
-intervix.vercel.app
+intervix.vercel.app/
 
 Intervix is a comprehensive full-stack application designed to help users master coding interviews with interactive Data Structures and Algorithms (DSA) problems and LeetCode-style questions. The platform offers a robust learning experience with courses and solutions created independently.
 
