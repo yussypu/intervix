@@ -1,4 +1,4 @@
-# Intervix: Coding Interview Mastery Platform
+# Intervix: Coding Interview Mastery Platform (NOT FINISHED)
 
 intervix.vercel.app
 
