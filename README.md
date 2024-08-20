@@ -25,6 +25,8 @@ Ensures type safety and improves code quality throughout the application.
 
 ### Firebase Knowledge: 
 Limited experience with Firebase resulted in some challenges during development. Future updates will aim to address these issues and enhance the application's backend functionalities.
+#### Mobile Formatting 
+Topbar on mobile looks wrong, the buttons need to be formatted.
 
 ## To Do
 ### Add language support: 
