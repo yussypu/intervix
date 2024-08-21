@@ -119,7 +119,7 @@ while(start < end) {
 				</code>
 			</pre>
 
-			<h4 className='text-lg font-bold text-white mb-2'>7. Conclusion</h4>
+			<h4 className='text-lg font-bold text-white mb-2'>Conclusion</h4>
 			<p className='text-lg text-white mb-4'>
 				Arrays are a versatile and powerful data structure that serves as the building block for many complex algorithms and data structures. Mastering arrays will provide you with a strong foundation in data structures and algorithms.
 			</p>
