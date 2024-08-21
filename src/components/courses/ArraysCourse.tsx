@@ -32,12 +32,11 @@ const ArraysCourse = () => {
 			<p className='text-lg text-white mb-4'>
 				Arrays in C++ can be declared and initialized in several ways:
 			</p>
-			<pre className='p-4 mb-4 overflow-auto'>
-				<code className='text-gray-200'>
+			<pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
+				<code>
 					{`int arr[5]; // Declaration of an array of size 5
 arr[0] = 10; // Initializing the first element
-int arr2[5] = {1, 2, 3, 4, 5}; // Declaration and initialization
-`}
+int arr2[5] = {1, 2, 3, 4, 5}; // Declaration and initialization`}
 				</code>
 			</pre>
 
@@ -45,12 +44,11 @@ int arr2[5] = {1, 2, 3, 4, 5}; // Declaration and initialization
 			<p className='text-lg text-white mb-4'>
 				Traversal refers to accessing each element of the array one by one:
 			</p>
-			<pre className='p-4 mb-4 overflow-auto'>
-				<code className='text-gray-200'>
+			<pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
+				<code>
 					{`for(int i = 0; i < 5; i++) {
     cout << arr2[i] << " ";
-} // Output: 1 2 3 4 5
-`}
+} // Output: 1 2 3 4 5`}
 				</code>
 			</pre>
 
@@ -58,16 +56,15 @@ int arr2[5] = {1, 2, 3, 4, 5}; // Declaration and initialization
 			<p className='text-lg text-white mb-4'>
 				Insertion involves adding an element at a specific index:
 			</p>
-			<pre className='p-4 mb-4 overflow-auto'>
-				<code className='text-gray-200'>
+			<pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
+				<code>
 					{`int arr[6] = {1, 2, 4, 5, 6};
 int pos = 2, newElement = 3;
 for(int i = 5; i > pos; i--) {
     arr[i] = arr[i-1];
 }
 arr[pos] = newElement;
-// Array after insertion: 1 2 3 4 5 6
-`}
+// Array after insertion: 1 2 3 4 5 6`}
 				</code>
 			</pre>
 
@@ -75,15 +72,14 @@ arr[pos] = newElement;
 			<p className='text-lg text-white mb-4'>
 				Deletion involves removing an element from a specific index:
 			</p>
-			<pre className='p-4 mb-4 overflow-auto'>
-				<code className='text-gray-200'>
+			<pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
+				<code>
 					{`int arr[6] = {1, 2, 3, 4, 5, 6};
 int pos = 2;
 for(int i = pos; i < 5; i++) {
     arr[i] = arr[i+1];
 }
-// Array after deletion: 1 2 4 5 6
-`}
+// Array after deletion: 1 2 4 5 6`}
 				</code>
 			</pre>
 
@@ -91,8 +87,8 @@ for(int i = pos; i < 5; i++) {
 			<p className='text-lg text-white mb-4'>
 				Searching for an element in an array returns its index:
 			</p>
-			<pre className='p-4 mb-4 overflow-auto'>
-				<code className='text-gray-200'>
+			<pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
+				<code>
 					{`int arr[5] = {1, 2, 3, 4, 5};
 int searchElement = 4;
 for(int i = 0; i < 5; i++) {
@@ -100,8 +96,7 @@ for(int i = 0; i < 5; i++) {
         cout << "Element found at index " << i << endl;
         break;
     }
-} // Output: Element found at index 3
-`}
+} // Output: Element found at index 3`}
 				</code>
 			</pre>
 
@@ -109,8 +104,8 @@ for(int i = 0; i < 5; i++) {
 			<p className='text-lg text-white mb-4'>
 				Here’s an example of reversing an array:
 			</p>
-			<pre className='p-4 mb-4 overflow-auto'>
-				<code className='text-gray-200'>
+			<pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
+				<code>
 					{`int arr[5] = {1, 2, 3, 4, 5};
 int start = 0, end = 4;
 while(start < end) {
@@ -120,8 +115,7 @@ while(start < end) {
     start++;
     end--;
 }
-// Array after reversing: 5 4 3 2 1
-`}
+// Array after reversing: 5 4 3 2 1`}
 				</code>
 			</pre>
 
