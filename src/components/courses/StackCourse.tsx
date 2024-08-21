@@ -113,7 +113,7 @@ int main() {
 				</code>
 			</pre>
 
-			<h4 className='text-lg font-bold text-white mb-2'>5. Conclusion</h4>
+			<h4 className='text-lg font-bold text-white mb-2'>Conclusion</h4>
 			<p className='text-lg text-white mb-4'>
 				Stacks are a versatile data structure that underpins many important algorithms and processes in computer science. Mastering stacks will equip you with essential problem-solving tools.
 			</p>
