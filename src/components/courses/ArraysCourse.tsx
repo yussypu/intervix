@@ -32,8 +32,8 @@ const ArraysCourse = () => {
 			<p className='text-lg text-white mb-4'>
 				Arrays in C++ can be declared and initialized in several ways:
 			</p>
-			<pre className='bg-dark-fill-3 p-4 mb-4 overflow-auto'>
-				<code className='text-green-400'>
+			<pre className='p-4 mb-4 overflow-auto'>
+				<code className='text-gray-200'>
 					{`int arr[5]; // Declaration of an array of size 5
 arr[0] = 10; // Initializing the first element
 int arr2[5] = {1, 2, 3, 4, 5}; // Declaration and initialization
@@ -45,8 +45,8 @@ int arr2[5] = {1, 2, 3, 4, 5}; // Declaration and initialization
 			<p className='text-lg text-white mb-4'>
 				Traversal refers to accessing each element of the array one by one:
 			</p>
-			<pre className='bg-dark-fill-3 p-4 mb-4 overflow-auto'>
-				<code className='text-green-400'>
+			<pre className='p-4 mb-4 overflow-auto'>
+				<code className='text-gray-200'>
 					{`for(int i = 0; i < 5; i++) {
     cout << arr2[i] << " ";
 } // Output: 1 2 3 4 5
@@ -58,8 +58,8 @@ int arr2[5] = {1, 2, 3, 4, 5}; // Declaration and initialization
 			<p className='text-lg text-white mb-4'>
 				Insertion involves adding an element at a specific index:
 			</p>
-			<pre className='bg-dark-fill-3 p-4 mb-4 overflow-auto'>
-				<code className='text-green-400'>
+			<pre className='p-4 mb-4 overflow-auto'>
+				<code className='text-gray-200'>
 					{`int arr[6] = {1, 2, 4, 5, 6};
 int pos = 2, newElement = 3;
 for(int i = 5; i > pos; i--) {
@@ -75,8 +75,8 @@ arr[pos] = newElement;
 			<p className='text-lg text-white mb-4'>
 				Deletion involves removing an element from a specific index:
 			</p>
-			<pre className='bg-dark-fill-3 p-4 mb-4 overflow-auto'>
-				<code className='text-green-400'>
+			<pre className='p-4 mb-4 overflow-auto'>
+				<code className='text-gray-200'>
 					{`int arr[6] = {1, 2, 3, 4, 5, 6};
 int pos = 2;
 for(int i = pos; i < 5; i++) {
@@ -91,8 +91,8 @@ for(int i = pos; i < 5; i++) {
 			<p className='text-lg text-white mb-4'>
 				Searching for an element in an array returns its index:
 			</p>
-			<pre className='bg-dark-fill-3 p-4 mb-4 overflow-auto'>
-				<code className='text-green-400'>
+			<pre className='p-4 mb-4 overflow-auto'>
+				<code className='text-gray-200'>
 					{`int arr[5] = {1, 2, 3, 4, 5};
 int searchElement = 4;
 for(int i = 0; i < 5; i++) {
@@ -109,8 +109,8 @@ for(int i = 0; i < 5; i++) {
 			<p className='text-lg text-white mb-4'>
 				Here’s an example of reversing an array:
 			</p>
-			<pre className='bg-dark-fill-3 p-4 mb-4 overflow-auto'>
-				<code className='text-green-400'>
+			<pre className='p-4 mb-4 overflow-auto'>
+				<code className='text-gray-200'>
 					{`int arr[5] = {1, 2, 3, 4, 5};
 int start = 0, end = 4;
 while(start < end) {
