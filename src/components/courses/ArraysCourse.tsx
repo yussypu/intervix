@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const executeCode = (code) => {
+const executeCode = (code: string): string => {
     try {
         // Basic simulation of JavaScript code execution
         return eval(code); // Warning: Using eval can be dangerous; it's just for demonstration here.
@@ -9,18 +9,18 @@ const executeCode = (code) => {
     }
 };
 
-const ArraysCourse = () => {
-    const [codeInput, setCodeInput] = useState(`for(int i = 0; i < 5; i++) { cout << arr[i] << " "; }`);
-    const [codeOutput, setCodeOutput] = useState('');
+const ArraysCourse: React.FC = () => {
+    const [codeInput, setCodeInput] = useState<string>(`for(int i = 0; i < 5; i++) { cout << arr[i] << " "; }`);
+    const [codeOutput, setCodeOutput] = useState<string>('');
 
     const handleRunCode = () => {
         setCodeOutput(executeCode(codeInput));
     };
 
-    const [selectedAnswer, setSelectedAnswer] = useState('');
-    const [quizFeedback, setQuizFeedback] = useState('');
+    const [selectedAnswer, setSelectedAnswer] = useState<string>('');
+    const [quizFeedback, setQuizFeedback] = useState<string>('');
 
-    const handleAnswer = (answer) => {
+    const handleAnswer = (answer: string) => {
         if (answer === 'Deletion') {
             setQuizFeedback("Correct! Deletion removes an element from the array.");
         } else {
@@ -28,7 +28,7 @@ const ArraysCourse = () => {
         }
     };
 
-    const [challengeSolution, setChallengeSolution] = useState('');
+    const [challengeSolution, setChallengeSolution] = useState<string>('');
 
     const handleChallengeSubmit = () => {
         // Validate and check solution
@@ -36,11 +36,11 @@ const ArraysCourse = () => {
         console.log(challengeSolution);
     };
 
-    const handleDragStart = (e) => {
-        e.dataTransfer.setData('text/plain', e.target.id);
+    const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+        e.dataTransfer.setData('text/plain', e.currentTarget.id);
     };
 
-    const handleDrop = (e) => {
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         const data = e.dataTransfer.getData('text/plain');
         const droppedElement = document.getElementById(data);
@@ -143,7 +143,9 @@ const ArraysCourse = () => {
 
             {/* Interactive Code Editor */}
             <h3 className='text-xl font-bold text-white mb-4'>Try It Yourself: Array Traversal</h3>
-            <p className='text-lg text-white mb-4'>Edit the code below to traverse this array. See the output in real-time:</p>
+            <p className='text-lg text-white mb-4'>
+                Enter your code below to test array operations:
+            </p>
             <textarea
                 value={codeInput}
                 onChange={(e) => setCodeInput(e.target.value)}
@@ -206,3 +208,4 @@ const ArraysCourse = () => {
 };
 
 export default ArraysCourse;
+
