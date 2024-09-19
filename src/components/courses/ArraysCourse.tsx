@@ -1,3 +1,8 @@
+import React, { useState } from 'react';
+import CodeEditor from '../components/CodeEditor';  // This component needs to be added
+import ArrayVisualization from '../components/ArrayVisualization';  // This component needs to be added
+import CodeChallenge from '../components/CodeChallenge';  // This component needs to be added
+
 const ArraysCourse = () => {
     const [pollFeedback, setPollFeedback] = useState('');
 
@@ -12,12 +17,7 @@ const ArraysCourse = () => {
 
     const reverseArrayProblem = {
         description: 'Write code to reverse an array.',
-        starterCode: `int arr[5] = {1, 2, 3, 4, 5};
-int start = 0, end = 4;
-while(start < end) {
-  // Your code here
-}
-// Output should be 5 4 3 2 1`,
+        starterCode: `int arr[5] = {1, 2, 3, 4, 5};\nint start = 0, end = 4;\nwhile(start < end) {\n  // Your code here\n}\n// Output should be 5 4 3 2 1`,
         testCases: [
             { input: '[1, 2, 3, 4, 5]', output: '[5, 4, 3, 2, 1]' }
         ]
