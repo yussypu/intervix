@@ -5,7 +5,9 @@ const executeCode = (code: string): string => {
         // Basic simulation of JavaScript code execution
         return eval(code); // Warning: Using eval can be dangerous; it's just for demonstration here.
     } catch (error) {
-        return `Error: ${error.message}`;
+        // Type assertion to 'any' to access 'message' property
+        const err = error as any;
+        return `Error: ${err.message}`;
     }
 };
 
@@ -138,11 +140,9 @@ const ArraysCourse: React.FC = () => {
 
             <h4 className='text-lg font-bold text-white mb-2'>Conclusion</h4>
             <p className='text-lg text-white mb-4'>
-                Arrays are a versatile and powerful data structure that serves as the building block for many complex algorithms and data structures. Mastering arrays will provide you with a strong foundation in data structures and algorithms.
+                Arrays are a versatile and powerful data structure that serves as the building block for many complex algorithms and data structures. Mastering arrays will significantly improve your problem-solving skills and coding efficiency.
             </p>
 
-            {/* Interactive Code Editor */}
-            <h3 className='text-xl font-bold text-white mb-4'>Try It Yourself: Array Traversal</h3>
             <p className='text-lg text-white mb-4'>
                 Enter your code below to test array operations:
             </p>
@@ -208,4 +208,3 @@ const ArraysCourse: React.FC = () => {
 };
 
 export default ArraysCourse;
-
