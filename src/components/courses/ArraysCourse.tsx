@@ -1,9 +1,3 @@
-
-import React, { useState } from 'react';
-import CodeEditor from '../components/CodeEditor';
-import ArrayVisualization from '../components/ArrayVisualization';
-import CodeChallenge from '../components/CodeChallenge';
-
 const ArraysCourse = () => {
     const [pollFeedback, setPollFeedback] = useState('');
 
