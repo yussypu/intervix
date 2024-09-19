@@ -21,7 +21,7 @@ const CodeChallenge: React.FC<CodeChallengeProps> = ({ prompt, initialCode, test
         return userResult === output ? 'Passed' : `Failed for input: ${input}`;
       });
       setOutput(results);
-    } catch (error) {
+    } catch (error: any) {  // Fix here by casting 'error' to 'any'
       setOutput([`Error: ${error.message}`]);
     }
   };
