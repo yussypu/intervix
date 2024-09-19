@@ -4,23 +4,23 @@ const executeCode = (code: string): string => {
     try {
         // Basic simulation of JavaScript code execution
         return eval(code); // Warning: Using eval can be dangerous; it's just for demonstration here.
-    } catch (error) {
-        // Type assertion to 'any' to access 'message' property
-        const err = error as any;
-        return `Error: ${err.message}`;
+    } catch (error: any) {
+        return `Error: ${error.message}`;
     }
 };
 
 const ArraysCourse: React.FC = () => {
-    const [codeInput, setCodeInput] = useState<string>(`for(int i = 0; i < 5; i++) { cout << arr[i] << " "; }`);
+    const [codeInput, setCodeInput] = useState<string>('');
     const [codeOutput, setCodeOutput] = useState<string>('');
+    const [quizFeedback, setQuizFeedback] = useState<string>('');
+    const [selectedAnswer, setSelectedAnswer] = useState<string>('');
+    const [challengeSolution, setChallengeSolution] = useState<string>('');
+    const [challengeFeedback, setChallengeFeedback] = useState<string>('');
 
     const handleRunCode = () => {
-        setCodeOutput(executeCode(codeInput));
+        const output = executeCode(codeInput);
+        setCodeOutput(output);
     };
-
-    const [selectedAnswer, setSelectedAnswer] = useState<string>('');
-    const [quizFeedback, setQuizFeedback] = useState<string>('');
 
     const handleAnswer = (answer: string) => {
         if (answer === 'Deletion') {
@@ -28,31 +28,28 @@ const ArraysCourse: React.FC = () => {
         } else {
             setQuizFeedback("Incorrect. Try again!");
         }
+        setSelectedAnswer(answer);
     };
-
-    const [challengeSolution, setChallengeSolution] = useState<string>('');
 
     const handleChallengeSubmit = () => {
-        // Validate and check solution
-        // For now, just display it
-        console.log(challengeSolution);
-    };
+        if (challengeSolution.trim() === '') {
+            setChallengeFeedback("Please provide a solution before submitting.");
+            return;
+        }
 
-    const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-        e.dataTransfer.setData('text/plain', e.currentTarget.id);
-    };
-
-    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        const data = e.dataTransfer.getData('text/plain');
-        const droppedElement = document.getElementById(data);
-        // Implement array update logic here
+        // Simple check to ensure that there is code written
+        if (challengeSolution.includes('// Your code here')) {
+            setChallengeFeedback("Please complete the code to solve the challenge.");
+        } else {
+            setChallengeFeedback("Challenge submitted! Check your solution.");
+        }
     };
 
     return (
-        <div className='p-6'>
-            <h2 className='text-2xl font-bold text-white mb-4'>Introduction to Arrays</h2>
-            <p className='text-lg text-white mb-4'>
+        <div className='p-6 max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-lg'>
+            <h2 className='text-3xl font-bold text-white mb-6'>Introduction to Arrays</h2>
+
+            <p className='text-lg text-white mb-6'>
                 Arrays are a fundamental data structure in computer science with a wide range of applications. They are essential for various tasks including:
             </p>
             <ul className='text-lg text-white mb-6 list-disc pl-6'>
@@ -62,144 +59,67 @@ const ArraysCourse: React.FC = () => {
                 <li><strong>Dynamic Structures:</strong> Arrays are foundational for creating dynamic data structures like linked lists and trees.</li>
             </ul>
 
-            <h3 className='text-xl font-bold text-white mb-4'>Common Operations on Arrays</h3>
+            <h3 className='text-2xl font-semibold text-white mb-4'>Common Operations on Arrays</h3>
             <p className='text-lg text-white mb-4'>
                 Arrays support several key operations, each serving a distinct purpose:
             </p>
-            <ul className='text-lg text-white list-disc pl-6'>
-                <li><strong>Traversal:</strong> This operation involves visiting each element in the array in a specific order, which could be sequential or reverse.</li>
-                <li><strong>Insertion:</strong> This involves adding a new element at a specific index within the array.</li>
-                <li><strong>Deletion:</strong> This operation entails removing an element from a particular index.</li>
-                <li><strong>Searching:</strong> This operation is used to locate the index of a specific element in the array.</li>
+            <ul className='text-lg text-white mb-6 list-disc pl-6'>
+                <li><strong>Traversal:</strong> Visiting each element in the array in a specific order, which could be sequential or reverse.</li>
+                <li><strong>Insertion:</strong> Adding a new element at a specific index within the array.</li>
+                <li><strong>Deletion:</strong> Removing an element from a particular index.</li>
+                <li><strong>Searching:</strong> Locating the index of a specific element in the array.</li>
             </ul>
 
-            <h3 className='text-xl font-bold text-white mb-4'>Array Implementation in C++</h3>
-            <p className='text-lg text-white mb-4'>
-                Let's look at how arrays can be implemented and used in C++:
-            </p>
-
-            <h4 className='text-lg font-bold text-white mb-2'>1. Declaration and Initialization</h4>
-            <p className='text-lg text-white mb-4'>
-                Arrays in C++ can be declared and initialized in several ways:
-            </p>
-            <pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
-                <code>
-                    {`int arr[5]; // Declaration of an array of size 5\narr[0] = 10; // Initializing the first element\nint arr2[5] = {1, 2, 3, 4, 5}; // Declaration and initialization`}
-                </code>
-            </pre>
-
-            <h4 className='text-lg font-bold text-white mb-2'>2. Traversal</h4>
-            <p className='text-lg text-white mb-4'>
-                Traversal refers to accessing each element of the array one by one:
-            </p>
-            <pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
-                <code>
-                    {`for(int i = 0; i < 5; i++) {\n    cout << arr2[i] << " ";\n} // Output: 1 2 3 4 5`}
-                </code>
-            </pre>
-
-            <h4 className='text-lg font-bold text-white mb-2'>3. Insertion</h4>
-            <p className='text-lg text-white mb-4'>
-                Insertion involves adding an element at a specific index:
-            </p>
-            <pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
-                <code>
-                    {`int arr[6] = {1, 2, 4, 5, 6};\nint pos = 2, newElement = 3;\nfor(int i = 5; i > pos; i--) {\n    arr[i] = arr[i-1];\n}\narr[pos] = newElement;\n// Array after insertion: 1 2 3 4 5 6`}
-                </code>
-            </pre>
-
-            <h4 className='text-lg font-bold text-white mb-2'>4. Deletion</h4>
-            <p className='text-lg text-white mb-4'>
-                Deletion involves removing an element from a specific index:
-            </p>
-            <pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
-                <code>
-                    {`int arr[6] = {1, 2, 3, 4, 5, 6};\nint pos = 2;\nfor(int i = pos; i < 5; i++) {\n    arr[i] = arr[i+1];\n}\n// Array after deletion: 1 2 4 5 6`}
-                </code>
-            </pre>
-
-            <h4 className='text-lg font-bold text-white mb-2'>5. Searching</h4>
-            <p className='text-lg text-white mb-4'>
-                Searching for an element in an array returns its index:
-            </p>
-            <pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
-                <code>
-                    {`int arr[5] = {1, 2, 3, 4, 5};\nint searchElement = 4;\nfor(int i = 0; i < 5; i++) {\n    if(arr[i] == searchElement) {\n        cout << "Element found at index " << i << endl;\n        break;\n    }\n} // Output: Element found at index 3`}
-                </code>
-            </pre>
-
-            <h4 className='text-lg font-bold text-white mb-2'>6. Example: Reversing an Array</h4>
-            <p className='text-lg text-white mb-4'>
-                Here’s an example of reversing an array:
-            </p>
-            <pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg overflow-auto'>
-                <code>
-                    {`int arr[5] = {1, 2, 3, 4, 5};\nint start = 0, end = 4;\nwhile(start < end) {\n    int temp = arr[start];\n    arr[start] = arr[end];\n    arr[end] = temp;\n    start++;\n    end--;\n}\n// Array after reversing: 5 4 3 2 1`}
-                </code>
-            </pre>
-
-            <h4 className='text-lg font-bold text-white mb-2'>Conclusion</h4>
-            <p className='text-lg text-white mb-4'>
-                Arrays are a versatile and powerful data structure that serves as the building block for many complex algorithms and data structures. Mastering arrays will significantly improve your problem-solving skills and coding efficiency.
-            </p>
-
+            <h3 className='text-2xl font-semibold text-white mb-4'>Interactive Code Block</h3>
             <p className='text-lg text-white mb-4'>
                 Enter your code below to test array operations:
             </p>
             <textarea
                 value={codeInput}
                 onChange={(e) => setCodeInput(e.target.value)}
-                className='w-full h-40 p-2 bg-gray-800 text-white'
+                className='w-full h-40 p-3 mb-4 bg-gray-900 text-white rounded border border-gray-700'
+                placeholder='Write your code here...'
             />
-            <button onClick={handleRunCode} className='mt-2 p-2 bg-blue-500 text-white'>Run Code</button>
-            <pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg'>{codeOutput}</pre>
+            <button onClick={handleRunCode} className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'>Run Code</button>
+            <pre className='bg-gray-900 text-gray-100 p-4 mt-4 rounded-lg'>{codeOutput}</pre>
 
-            {/* Interactive Poll */}
-            <div className='interactive-poll'>
-                <h3 className='text-lg text-white mb-4'>Quick Question:</h3>
-                <p className='text-white'>Which operation is used to remove an element from an array?</p>
-                <ul>
-                    <li><button onClick={() => handleAnswer('Insertion')} className='text-blue-500'>Insertion</button></li>
-                    <li><button onClick={() => handleAnswer('Traversal')} className='text-blue-500'>Traversal</button></li>
-                    <li><button onClick={() => handleAnswer('Deletion')} className='text-blue-500'>Deletion</button></li>
-                    <li><button onClick={() => handleAnswer('Searching')} className='text-blue-500'>Searching</button></li>
-                </ul>
-                <p className="text-green-500 mt-2">{quizFeedback}</p>
+            <h3 className='text-2xl font-semibold text-white mt-8 mb-4'>Quick Quiz</h3>
+            <p className='text-lg text-white mb-4'>
+                Which operation is used to remove an element from an array?
+            </p>
+            <div className='flex flex-col mb-4'>
+                {['Insertion', 'Traversal', 'Deletion', 'Searching'].map((option) => (
+                    <button
+                        key={option}
+                        onClick={() => handleAnswer(option)}
+                        className={`p-2 mb-2 rounded ${selectedAnswer === option ? 'text-white' : 'text-blue-500'} ${selectedAnswer && option !== 'Deletion' ? 'bg-red-600' : 'bg-gray-700'} hover:bg-gray-600`}
+                    >
+                        {option}
+                    </button>
+                ))}
             </div>
+            <p className="text-green-500 mb-4">{quizFeedback}</p>
 
-            {/* Visualization Example */}
-            <h3 className='text-xl font-bold text-white mb-4'>Visualize: Array Insertion</h3>
-            <p className='text-lg text-white mb-4'>Drag and drop elements to insert a new element into the array:</p>
-            <div
-                className='array-container'
-                onDrop={handleDrop}
-                onDragOver={(e) => e.preventDefault()}
-            >
-                <div id='element1' draggable onDragStart={handleDragStart} className='draggable-element bg-gray-700 text-white p-2 rounded'>1</div>
-                <div id='element2' draggable onDragStart={handleDragStart} className='draggable-element bg-gray-700 text-white p-2 rounded'>2</div>
-                <div id='element3' draggable onDragStart={handleDragStart} className='draggable-element bg-gray-700 text-white p-2 rounded'>3</div>
-                {/* Add more elements */}
-            </div>
-
-            {/* Mini-Challenge */}
-            <h3 className='text-xl font-bold text-white mb-4'>Challenge: Reverse an Array</h3>
-            <p className='text-lg text-white mb-4'>Write code to reverse this array. Test your code by clicking "Run".</p>
+            <h3 className='text-2xl font-semibold text-white mb-4'>Challenge: Reverse an Array</h3>
+            <p className='text-lg text-white mb-4'>
+                Write code to reverse this array. Test your code by clicking "Submit Solution".
+            </p>
             <textarea
                 value={challengeSolution}
                 onChange={(e) => setChallengeSolution(e.target.value)}
-                className='w-full h-40 p-2 bg-gray-800 text-white'
+                className='w-full h-40 p-3 mb-4 bg-gray-900 text-white rounded border border-gray-700'
+                placeholder='Write your solution here...'
             />
-            <button onClick={handleChallengeSubmit} className='mt-2 p-2 bg-blue-500 text-white'>Submit Solution</button>
+            <button onClick={handleChallengeSubmit} className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'>Submit Solution</button>
+            <p className="text-yellow-500 mt-4">{challengeFeedback}</p>
 
-            {/* Real-World Scenario */}
-            <h3 className='text-xl font-bold text-white mb-4'>Real-World Scenario: Leaderboard System</h3>
-            <p className='text-lg text-white mb-4'>
+            <h3 className='text-2xl font-semibold text-white mt-8 mb-4'>Real-World Scenario</h3>
+            <p className='text-lg text-white mb-6'>
                 Imagine you are building a leaderboard for a game. Use arrays to manage and update player scores efficiently.
                 Implement operations such as inserting new scores, removing old ones, and sorting the leaderboard.
             </p>
 
-            {/* Peer-to-Peer Discussion */}
-            <h3 className='text-xl font-bold text-white mb-4'>Peer-to-Peer Discussion</h3>
+            <h3 className='text-2xl font-semibold text-white mb-4'>Peer-to-Peer Discussion</h3>
             <p className='text-lg text-white mb-4'>
                 Join discussions with your peers to solve array-related problems and share insights. Engage with the community for collaborative learning.
             </p>
