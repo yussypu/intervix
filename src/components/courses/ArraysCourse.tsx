@@ -59,7 +59,7 @@ const ArraysCourse: React.FC = () => {
     };
 
     return (
-        <div className='w-full h-full p-6 bg-gray-800'>
+        <div className='w-full h-full p-6 bg-gray-900'>
             <div className='max-w-screen-lg mx-auto'>
                 <h2 className='text-3xl font-bold text-white mb-6'>Introduction to Arrays</h2>
 
@@ -91,11 +91,11 @@ const ArraysCourse: React.FC = () => {
                 <textarea
                     value={codeInput}
                     onChange={(e) => setCodeInput(e.target.value)}
-                    className='w-full h-40 p-3 mb-4 bg-gray-900 text-white rounded border border-gray-700'
+                    className='w-full h-40 p-3 mb-4 bg-gray-800 text-white rounded border border-gray-700'
                     placeholder='Write your code here...'
                 />
-                <button onClick={handleRunCode} className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'>Run Code</button>
-                <pre className='bg-gray-900 text-gray-100 p-4 mt-4 rounded-lg'>{codeOutput}</pre>
+                <button onClick={handleRunCode} className='p-2 bg-blue-500 text-white rounded hover:bg-blue-600'>Run Code</button>
+                <pre className='bg-gray-800 text-gray-100 p-4 mt-4 rounded-lg'>{codeOutput}</pre>
 
                 <h3 className='text-2xl font-semibold text-white mt-8 mb-4'>Quick Quiz</h3>
                 <p className='text-lg text-white mb-4'>
@@ -118,40 +118,26 @@ const ArraysCourse: React.FC = () => {
                 <p className='text-lg text-white mb-4'>
                     Write code to reverse the following array:
                 </p>
-                <pre className='bg-gray-900 text-gray-100 p-4 mb-4 rounded-lg'>{`[1, 2, 3, 4, 5]`}</pre>
+                <pre className='bg-gray-800 text-gray-100 p-4 mb-4 rounded-lg'>{`[1, 2, 3, 4, 5]`}</pre>
                 <textarea
                     value={challengeSolution}
                     onChange={(e) => setChallengeSolution(e.target.value)}
-                    className='w-full h-40 p-3 mb-4 bg-gray-900 text-white rounded border border-gray-700'
+                    className='w-full h-40 p-3 mb-4 bg-gray-800 text-white rounded border border-gray-700'
                     placeholder='Write your solution here...'
                 />
-                <button onClick={handleChallengeSubmit} className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'>Submit Solution</button>
+                <button onClick={handleChallengeSubmit} className='p-2 bg-blue-500 text-white rounded hover:bg-blue-600'>Submit Solution</button>
                 <p className="text-yellow-500 mt-4">{challengeFeedback}</p>
 
-                <h3 className='text-2xl font-semibold text-white mt-8 mb-4'>Real-World Scenario</h3>
-                <p className='text-lg text-white mb-4'>
-                    Imagine you are building a leaderboard for a game. Use arrays to manage and update player scores efficiently. Implement operations such as inserting new scores, removing old ones, and sorting the leaderboard.
-                </p>
-                <p className='text-lg text-white mb-4'>
-                    Enter an array of scores and visualize how they are updated:
-                </p>
-                <input
-                    type='text'
-                    value={arrayInput}
-                    onChange={handleArrayInputChange}
-                    className='w-full p-3 mb-4 bg-gray-900 text-white rounded border border-gray-700'
-                    placeholder='Enter scores separated by commas...'
-                />
-                <button onClick={handleArrayReverse} className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'>Reverse Array</button>
-                <div className='bg-gray-900 text-gray-100 p-4 mt-4 rounded-lg'>
-                    <h4 className='text-lg font-semibold mb-2'>Array Visualization:</h4>
-                    <pre>{JSON.stringify(visualizedArray, null, 2)}</pre>
-                </div>
-
-                <h3 className='text-2xl font-semibold text-white mt-8 mb-4'>Peer-to-Peer Discussion</h3>
-                <p className='text-lg text-white mb-4'>
-                    Join discussions with your peers to solve array-related problems and share insights. Engage with the community for collaborative learning.
-                </p>
+                <h3 className='text-2xl font-semibold text-white mt-8 mb-4'>Top Array Interview Questions</h3>
+                <ul className='text-lg text-white mb-6 list-disc pl-6'>
+                    <li><strong>Find the Maximum Product of Two Integers in an Array</strong> - Given an array of integers, find the maximum product of any two integers.</li>
+                    <li><strong>Rotate an Array</strong> - Rotate an array to the right by `k` steps, where `k` is non-negative.</li>
+                    <li><strong>Merge Intervals</strong> - Given a collection of intervals, merge all overlapping intervals.</li>
+                    <li><strong>Find Missing Number</strong> - Find the missing number in a given integer array containing 0 to n, where exactly one number is missing.</li>
+                    <li><strong>Longest Consecutive Sequence</strong> - Given an unsorted array of integers, find the length of the longest consecutive elements sequence.</li>
+                    <li><strong>Product of Array Except Self</strong> - Given an array of n integers, return an array of the products of all elements except itself.</li>
+                    <li><strong>Container With Most Water</strong> - Given an array of integers representing the heights of bars, find two lines that together with the x-axis form a container that holds the most water.</li>
+                </ul>
             </div>
         </div>
     );
