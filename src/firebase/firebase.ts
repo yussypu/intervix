@@ -1,24 +1,28 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp,getApp,getApps } from "firebase/app";
+import { initializeApp, getApp, getApps } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: "AIzaSyAShco393OPVpLdiamiUTlgoRh1tW4pUuI",
+  authDomain: "intervix-19efb.firebaseapp.com",
+  projectId: "intervix-19efb",
+  storageBucket: "intervix-19efb.appspot.com",
+  messagingSenderId: "543380202671",
+  appId: "1:543380202671:web:2aeb497ef6241a4cc6a05a",
   measurementId: "G-8NPEPF9Q52"
 };
 
 // Initialize Firebase
-const app = !getApps.length ? initializeApp(firebaseConfig) : getApp();
-const analytics = getAnalytics(app);
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+let analytics;
+if (typeof window !== "undefined") {
+  // Analytics should only be initialized in the browser
+  analytics = getAnalytics(app);
+}
 
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 
-export {auth, firestore, app};
+export { auth, firestore, app };
