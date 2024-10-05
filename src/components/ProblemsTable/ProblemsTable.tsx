@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { BsCheckCircle, BsYoutube } from "react-icons/bs";
+import { BsCheckCircle } from "react-icons/bs";
 import { collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { auth, firestore } from "@/firebase/firebase";
 import { DBProblem } from "@/utils/types/problem";
@@ -55,7 +55,8 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems, selec
                             Difficulty
                         </th>
                         <th scope='col' className='px-6 py-3 w-0 font-medium cursor-pointer' onClick={() => {
-                            setProblems(problems.slice().reverse());
+                            // Toggle sorting by category when the header is clicked
+                            setProblems(problems.slice().reverse()); // Example: toggling the sort order
                         }}>
                             Category
                         </th>
@@ -66,7 +67,7 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems, selec
                 </thead>
                 <tbody className='text-white'>
                     {problems.map((problem, idx) => {
-                        const difficultyColor =
+                        const difficulyColor =
                             problem.difficulty === "Easy"
                                 ? "text-dark-green-s"
                                 : problem.difficulty === "Medium"
@@ -74,7 +75,7 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems, selec
                                 : "text-dark-pink";
 
                         return (
-                            <tr className={`${idx % 2 === 1 ? "bg-dark-layer-1" : ""}`} key={problem.id}>
+                            <tr className={`${idx % 2 == 1 ? "bg-dark-layer-1" : ""}`} key={problem.id}>
                                 <th className='px-2 py-4 font-medium whitespace-nowrap text-dark-green-s'>
                                     {solvedProblems.includes(problem.id) && <BsCheckCircle fontSize={"18"} width='18' />}
                                 </th>
@@ -96,16 +97,10 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems, selec
                                         </Link>
                                     )}
                                 </td>
-                                <td className={`px-6 py-4 ${difficultyColor}`}>{problem.difficulty}</td>
+                                <td className={`px-6 py-4 ${difficulyColor}`}>{problem.difficulty}</td>
                                 <td className={"px-6 py-4"}>{problem.category}</td>
                                 <td className={"px-6 py-4"}>
-                                    {problem.youtubeLink ? (
-                                        <a href={problem.youtubeLink} target="_blank" rel="noopener noreferrer">
-                                            <BsYoutube fontSize={"24"} className="text-red-500 hover:text-red-700 cursor-pointer" />
-                                        </a>
-                                    ) : (
-                                        <p className='text-gray-400'>Coming soon</p>
-                                    )}
+                                    <p className='text-gray-400'>Coming soon</p>
                                 </td>
                             </tr>
                         );
