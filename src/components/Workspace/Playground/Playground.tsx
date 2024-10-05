@@ -3,7 +3,7 @@ import PreferenceNav from "./PreferenceNav/PreferenceNav";
 import Split from "react-split";
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
-import { cpp } from "@codemirror/lang-cpp";
+import { javascript } from "@codemirror/lang-javascript";
 import EditorFooter from "./EditorFooter";
 import { Problem } from "@/utils/types/problem";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -121,7 +121,7 @@ const Playground: React.FC<PlaygroundProps> = ({ problem, setSuccess, setSolved 
 						value={userCode}
 						theme={vscodeDark}
 						onChange={onChange}
-						extensions={[cpp()]}
+						extensions={[javascript()]}
 						style={{ fontSize: settings.fontSize }}
 					/>
 				</div>
