@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { BsCheckCircle } from "react-icons/bs";
+import { BsCheckCircle, BsYoutube } from "react-icons/bs";  // Import YouTube icon
 import { collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { auth, firestore } from "@/firebase/firebase";
 import { DBProblem } from "@/utils/types/problem";
@@ -100,7 +100,13 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ setLoadingProblems, selec
                                 <td className={`px-6 py-4 ${difficulyColor}`}>{problem.difficulty}</td>
                                 <td className={"px-6 py-4"}>{problem.category}</td>
                                 <td className={"px-6 py-4"}>
-                                    <p className='text-gray-400'>Coming soon</p>
+                                    {problem.youtubeLink ? (
+                                        <a href={problem.youtubeLink} target="_blank" rel="noopener noreferrer">
+                                            <BsYoutube fontSize={"24"} className="text-red-500 hover:text-red-700 cursor-pointer" />
+                                        </a>
+                                    ) : (
+                                        <p className='text-gray-400'>Coming soon</p>
+                                    )}
                                 </td>
                             </tr>
                         );
